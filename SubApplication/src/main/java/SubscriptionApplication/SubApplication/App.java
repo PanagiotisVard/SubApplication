@@ -1,13 +1,11 @@
-package main;
+package SubscriptionApplication.SubApplication;
 
-
-import client.Client;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
@@ -15,26 +13,21 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 
+import SubscriptionApplication.SubApplication.client.Client;
 
-
-public class Main extends Application {
-
+/**
+ * JavaFX App
+ */
+public class App extends Application {
 	Stage window;
 	TableView<Client> table;
 	TextField inputFName,inputLName;
-	
-	
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		launch(args);
-	}
 
-	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		// TODO Auto-generated method stub
@@ -45,57 +38,57 @@ public class Main extends Application {
 		//Name Columns
 		
 		//Column for the Clients First Name
-		TableColumn<Client, String> firstNameColumn = new TableColumn<>("ÏÍÏÌÁ");
+		TableColumn<Client, String> firstNameColumn = new TableColumn<>("ï¿½ï¿½ï¿½ï¿½ï¿½");
 		firstNameColumn.setMinWidth(95);	
 		firstNameColumn.setCellValueFactory(new PropertyValueFactory<>("firstName"));
 		
 		//Column for the Clients Last Name
-		TableColumn<Client, String> lastNameColumn = new TableColumn<>("ÅĞÉÈÅÔÏ");
+		TableColumn<Client, String> lastNameColumn = new TableColumn<>("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
 		lastNameColumn.setMinWidth(95);	
 		lastNameColumn.setCellValueFactory(new PropertyValueFactory<>("lastName"));
 		
 		//Column for the Clients father first name
-		TableColumn<Client, String> fatherFirstNameColumn = new TableColumn<>("ÏÍÏÌÁ ĞÁÔÅÑÁ");
+		TableColumn<Client, String> fatherFirstNameColumn = new TableColumn<>("ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
 		fatherFirstNameColumn.setMinWidth(115);	
 		fatherFirstNameColumn.setCellValueFactory(new PropertyValueFactory<>("fatherFirstName"));
 		
 		//Column for the Clients address
-		TableColumn<Client, String> addressColumn = new TableColumn<>("ÏÄÏÓ");
+		TableColumn<Client, String> addressColumn = new TableColumn<>("ï¿½ï¿½ï¿½ï¿½");
 		addressColumn.setMinWidth(95);	
 		addressColumn.setCellValueFactory(new PropertyValueFactory<>("address"));
 		
 		//Column for the Clients kind of Subscription
-		TableColumn<Client, String> kindOfSubscriptionColumn = new TableColumn<>("ÔÕĞÏÓ ÅÃÃÑÁÖÇÓ");
+		TableColumn<Client, String> kindOfSubscriptionColumn = new TableColumn<>("ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
 		kindOfSubscriptionColumn.setMinWidth(115);	
 		kindOfSubscriptionColumn.setCellValueFactory(new PropertyValueFactory<>("kindOfSubscription"));
 		
 		//Column for the Clients kind of Exercise
-		TableColumn<Client, String> kindOfExerciseColumn = new TableColumn<>("ÅÉÄÏÓ ÁÓÊÇÓÇÓ");
+		TableColumn<Client, String> kindOfExerciseColumn = new TableColumn<>("ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
 		kindOfExerciseColumn.setMinWidth(115);	
 		kindOfExerciseColumn.setCellValueFactory(new PropertyValueFactory<>("kindOfExercise"));
 		
 		//Column for the Clients Zip Code
-		TableColumn<Client, Integer> zipCodeColumn = new TableColumn<>("ÔÊ");
+		TableColumn<Client, Integer> zipCodeColumn = new TableColumn<>("ï¿½ï¿½");
 		zipCodeColumn.setMinWidth(95);	
 		zipCodeColumn.setCellValueFactory(new PropertyValueFactory<>("zipCode"));
 		
 		//Column for the Clients Phone Number
-		TableColumn<Client, Long> phoneNumberColumn = new TableColumn<>("ÔÇËÅÖÙÍÏ");
+		TableColumn<Client, Long> phoneNumberColumn = new TableColumn<>("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
 		phoneNumberColumn.setMinWidth(95);	
 		phoneNumberColumn.setCellValueFactory(new PropertyValueFactory<>("phoneNumber"));
 		
 		//Column for the Clients Birth Day
-		TableColumn<Client, Integer> birthDayColumn = new TableColumn<>("ÇÌÅÑÁ ÃÅÍÍÇÓÇÓ");
+		TableColumn<Client, Integer> birthDayColumn = new TableColumn<>("ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
 		birthDayColumn.setMinWidth(115);	
 		birthDayColumn.setCellValueFactory(new PropertyValueFactory<>("birthDay"));
 		
 		//Column for the Clients Birth Month
-		TableColumn<Client, Integer> birthMonthColumn = new TableColumn<>("ÌÇÍÁÓ ÃÅÍÍÇÓÇÓ");
+		TableColumn<Client, Integer> birthMonthColumn = new TableColumn<>("ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
 		birthMonthColumn.setMinWidth(125);	
 		birthMonthColumn.setCellValueFactory(new PropertyValueFactory<>("birthMonth"));
 		
 		//Column for the Clients Birth Year
-		TableColumn<Client, Integer> birthYearColumn = new TableColumn<>("ÅÔÏÓ ÃÅÍÍÇÓÇÓ");
+		TableColumn<Client, Integer> birthYearColumn = new TableColumn<>("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
 		birthYearColumn.setMinWidth(115);	
 		birthYearColumn.setCellValueFactory(new PropertyValueFactory<>("birthYear"));
 		
@@ -163,32 +156,14 @@ public class Main extends Application {
 	public ObservableList<Client> getClient(){
 		
 		ObservableList<Client> clients = FXCollections.observableArrayList();
-		clients.add(new Client("Ğáíáãéşôçò","ÂáñäÜñçò","Íéêüëáïò","Âáóéëİùò Áëêİôá 28","ÖïéôçôéêŞ","ÏËÁ",67100,6944163467L, 4, 8 ,2000));
-		clients.add(new Client("ÁíáóôÜóéïò","Ëéüíôïò","ÄçìŞôñéïò","Åõáãüñá Ğáëëçêáñßäç 4 ","ÖïéôçôéêŞ","Mai Thai",45221,6944163467L, 4, 8 ,2000));
+		clients.add(new Client("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½","ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½","ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½","ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 28","ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½","ï¿½ï¿½ï¿½",67100,6944163467L, 4, 8 ,2000));
+		clients.add(new Client("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½","ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½","ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½","ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 4 ","ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½","Mai Thai",45221,6944163467L, 4, 8 ,2000));
 
 		return clients;
 	}
 
+    public static void main(String[] args) {
+        launch();
+    }
+
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

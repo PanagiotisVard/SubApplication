@@ -1,4 +1,4 @@
-package client;
+package SubscriptionApplication.SubApplication.client;
 
 public class Client {
 

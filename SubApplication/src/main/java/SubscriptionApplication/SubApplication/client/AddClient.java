@@ -1,4 +1,4 @@
-package client;
+package SubscriptionApplication.SubApplication.client;
 
 
 import javafx.geometry.Insets;
