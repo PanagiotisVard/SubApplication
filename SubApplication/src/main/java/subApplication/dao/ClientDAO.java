@@ -6,12 +6,14 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 import subApplication.model.Client;
 
 public class ClientDAO {
-	private static Connection connection;
-	private static String dbUrl;
+	
+	private Connection connection;
+	private String dbUrl;
 
 	public ClientDAO() {
 		connection = null;
@@ -22,7 +24,7 @@ public class ClientDAO {
 	
 	
 	
-	private static void connect() {
+	private void connect() {
 		try {
 			dbUrl = "jdbc:sqlite:db/clients.db";
 			connection = DriverManager.getConnection(dbUrl);
@@ -34,22 +36,32 @@ public class ClientDAO {
 		
 	}
 	
-	public static void selectAll() {
-		String sql = "SELECT firstName FROM client;";
+	public  ArrayList<Client> selectAll() {
+		String sql = "SELECT * FROM client;";
+		ArrayList<Client> clients = new ArrayList<Client>();
+		
+		
 		try (	
 	             Statement stmt  = connection.createStatement();
 	             ResultSet rs    = stmt.executeQuery(sql)){
 	            
 	            // loop through the result set
 	            while (rs.next()) {
-	                System.out.println(rs.getString("firstName"));
+	                //System.out.println(rs.getString("firstName"));
+	            	Client client = new Client(rs.getString("firstName"),rs.getString("lastName"),rs.getString("fatherFirstName"),rs.getString("address"),
+	            			Integer.parseInt(rs.getString("zipCode")),rs.getString("kindOfSubscription"),rs.getString("kindOfExercise"),Long.parseLong(rs.getString("phoneNumber")),
+	            			rs.getString("birthDate"));
+	                clients.add(client);
 	            }
 	        } catch (SQLException e) {
 	            System.out.println(e.getMessage());
 	        }
+		
+		return clients;
+		
 	}
 	
-	public static void insert(Client client) {
+	public void insert(Client client) {
 		String sql = "INSERT INTO client(firstName, lastName, fatherfirstName, address, zipCode, "
 				+ "kindOfSubscription, kindOfExercise, phoneNumber, birthDate) VALUES(?,?,?,?,?,?,?,?,?)";
 		
@@ -74,7 +86,7 @@ public class ClientDAO {
 		
 	}
 	
-	public static void delete(int id) {
+	public void delete(int id) {
 		String sql = "DELETE FROM client WHERE id = ?";
 		
 		try(PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
@@ -91,7 +103,7 @@ public class ClientDAO {
 		
 	}
 	
-	public static void update(int id, Client client) {
+	public void update(int id, Client client) {
 		String sql = "UPDATE client SET firstName = ?, lastName = ?, fatherfirstName = ?, address = ?, zipCode = ?, "
 				+ "kindOfSubscription = ?, kindOfExercise = ?, phoneNumber = ?, birthDate = ? WHERE id = ?";
 		
@@ -118,13 +130,32 @@ public class ClientDAO {
 		
 	}
 	
-	public static void main(String[] args) {
-		connect();
+	public Client selectById(int id) {
+		String sql = "SELECT * FROM client WHERE id = ?;";
+		Client client = null;
+		try(PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+
+	
+			preparedStatement.setInt(1, id);
+			
+			ResultSet rs = preparedStatement.executeQuery();
+			 // loop through the result set
+			
+            while (rs.next()) {
+            	client = new Client(rs.getString("firstName"),rs.getString("lastName"),rs.getString("fatherFirstName"),rs.getString("address"),
+            			Integer.parseInt(rs.getString("zipCode")),rs.getString("kindOfSubscription"),rs.getString("kindOfExercise"),Long.parseLong(rs.getString("phoneNumber")),
+            			rs.getString("birthDate"));
+            	
+                System.out.println(rs.getString("firstName")+rs.getString("lastName"));
+            }	
+			
+			
+			
+		} catch (SQLException e) {
+			// TODO: handle exception
+		}
 		
-		Client updatedClient = new Client("Tassos", "Liontos", "Thanasis", "Ioannina", 44444, "Student", "Test", 6999999999l, "1/1/22");
-		update(4, updatedClient);
-		
-		
+		return client;
 	}
 
 }
