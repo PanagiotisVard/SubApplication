@@ -1,4 +1,4 @@
-package SubscriptionApplication.SubApplication;
+package subApplication;
 
 import javafx.application.Application;
 import javafx.collections.FXCollections;
@@ -15,10 +15,9 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import subApplication.model.Client;
 
 import java.io.IOException;
-
-import SubscriptionApplication.SubApplication.client.Client;
 
 /**
  * JavaFX App

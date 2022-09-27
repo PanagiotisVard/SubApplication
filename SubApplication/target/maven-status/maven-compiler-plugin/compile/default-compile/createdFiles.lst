@@ -1,5 +1,2 @@
-SubscriptionApplication/SubApplication/client/DeleteClient.class
-SubscriptionApplication/SubApplication/App.class
-SubscriptionApplication/SubApplication/client/Client.class
-SubscriptionApplication/SubApplication/client/AddClient.class
-SubscriptionApplication/SubApplication/client/UpdateClient.class
+subApplication/App.class
+subApplication/model/Client.class

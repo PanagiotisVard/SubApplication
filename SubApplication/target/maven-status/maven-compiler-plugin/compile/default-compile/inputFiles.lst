@@ -1,5 +1,2 @@
-/home/tasakos/MyWork/SubApplication/SubApplication/src/main/java/SubscriptionApplication/SubApplication/client/DeleteClient.java
-/home/tasakos/MyWork/SubApplication/SubApplication/src/main/java/SubscriptionApplication/SubApplication/client/UpdateClient.java
-/home/tasakos/MyWork/SubApplication/SubApplication/src/main/java/SubscriptionApplication/SubApplication/client/AddClient.java
-/home/tasakos/MyWork/SubApplication/SubApplication/src/main/java/SubscriptionApplication/SubApplication/App.java
-/home/tasakos/MyWork/SubApplication/SubApplication/src/main/java/SubscriptionApplication/SubApplication/client/Client.java
+/home/tasakos/MyWork/SubApplication/SubApplication/src/main/java/subApplication/model/Client.java
+/home/tasakos/MyWork/SubApplication/SubApplication/src/main/java/subApplication/App.java

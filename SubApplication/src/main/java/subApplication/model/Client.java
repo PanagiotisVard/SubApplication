@@ -1,4 +1,4 @@
-package SubscriptionApplication.SubApplication.client;
+package subApplication.model;
 
 public class Client {
 
@@ -10,10 +10,8 @@ public class Client {
 	private String kindOfSubscription; //either student Sub either normal Sub
 	private String kindOfExercise;     //kick-box/mai-thai/box/all/some of 'em
 	private int    zipCode;			   //TK
-	private long    phoneNumber;		   //Phone number
-	private int    birthDay;		   //Day of Birthday
-	private int    birthMonth;		   //Month of Birthday
-	private int    birthYear;		   //Year of Birthday
+	private long   phoneNumber;		   //Phone number
+	private String birthDate;
 	
 	
 	
@@ -27,17 +25,14 @@ public class Client {
 		this.kindOfExercise = "";
 		this.zipCode = 0;
 		this.phoneNumber = 0;
-		this.birthDay = 0;
-		this.birthMonth = 0;
-		this.birthYear = 0;
+		this.birthDate = "";
 		
 	}
 
 	
 	//Constructor
-	public Client(String firstName, String lastName, String fatherFirstName, String address,
-			String kindOfSubscription, String kindOfExercise, int zipCode, long phoneNumber, int birthDay,
-			int birthMonth, int birthYear) {
+	public Client(String firstName, String lastName, String fatherFirstName, String address, int zipCode,
+			String kindOfSubscription, String kindOfExercise, long phoneNumber, String birthDate) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -47,9 +42,8 @@ public class Client {
 		this.kindOfExercise = kindOfExercise;
 		this.zipCode = zipCode;
 		this.phoneNumber = phoneNumber;
-		this.birthDay = birthDay;
-		this.birthMonth = birthMonth;
-		this.birthYear = birthYear;
+		this.birthDate = birthDate;
+
 	}
 
 
@@ -118,28 +112,16 @@ public class Client {
 		this.phoneNumber = phoneNumber;
 	}
 
-	public int getBirthDay() {
-		return birthDay;
+
+	public String getBirthDate() {
+		return birthDate;
 	}
 
-	public void setBirthDay(int birthDay) {
-		this.birthDay = birthDay;
+
+	public void setBirthDate(String birthDate) {
+		this.birthDate = birthDate;
 	}
 
-	public int getBirthMonth() {
-		return birthMonth;
-	}
-
-	public void setBirthMonth(int birthMonth) {
-		this.birthMonth = birthMonth;
-	}
-
-	public int getBirthYear() {
-		return birthYear;
-	}
-
-	public void setBirthYear(int birthYear) {
-		this.birthYear = birthYear;
-	}
+	
 		
 }
