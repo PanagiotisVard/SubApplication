@@ -24,7 +24,7 @@ public class ClientDAO {
 	
 	
 	
-	private void connect() {
+	public void connect() {
 		try {
 			dbUrl = "jdbc:sqlite:db/clients.db";
 			connection = DriverManager.getConnection(dbUrl);

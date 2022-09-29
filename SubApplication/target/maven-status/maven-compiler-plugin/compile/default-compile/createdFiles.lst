@@ -1,2 +1,4 @@
+subApplication/controller/MainController.class
 subApplication/App.class
+subApplication/dao/ClientDAO.class
 subApplication/model/Client.class
