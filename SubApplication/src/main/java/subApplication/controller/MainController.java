@@ -7,7 +7,7 @@ import java.util.ResourceBundle;
 import subApplication.dao.ClientDAO;
 import subApplication.model.Client;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import javafx.collections.ObservableList;import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -55,7 +55,7 @@ public class MainController implements Initializable {
 
 		@FXML	
 		public void populate() {
-			dao = new ClientDAO();
+			dao = ClientDAO.getInstance();
 			ObservableList<Client> clients = FXCollections.observableArrayList(dao.selectAll());
 			
 			
@@ -87,6 +87,7 @@ public class MainController implements Initializable {
 //			        stage.setTitle("New Window");
 			        stage.setScene(scene);
 			        stage.show();
+			        stage.setOnCloseRequest(event ->  populate());
 			    } catch (IOException e) {
 			        
 			    }

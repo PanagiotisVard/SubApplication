@@ -10,31 +10,24 @@ import java.util.ArrayList;
 
 import subApplication.model.Client;
 
-public class ClientDAO {
+public class ClientDAO extends DAO {
 	
-	private Connection connection;
-	private String dbUrl;
+	
+	private static ClientDAO instance = null; 
 
-	public ClientDAO() {
-		connection = null;
-		connect();
-		
-		
+	private ClientDAO() {
+		super.connect();
 	}
 	
-	
-	
-	public void connect() {
-		try {
-			dbUrl = "jdbc:sqlite:db/clients.db";
-			connection = DriverManager.getConnection(dbUrl);
-			
-		} catch (SQLException e) {
-			// TODO: handle exception
-			System.out.println(e.getMessage());
+	public static ClientDAO getInstance() {
+		if (instance == null) {
+			instance = new ClientDAO();
 		}
+		return instance;
 		
 	}
+	
+	
 	
 	public  ArrayList<Client> selectAll() {
 		String sql = "SELECT * FROM client;";
@@ -130,13 +123,13 @@ public class ClientDAO {
 		
 	}
 	
-	public Client selectById(int id) {
-		String sql = "SELECT * FROM client WHERE id = ?;";
+	public Client selectByPhoneNumber(int phoneNumber) {
+		String sql = "SELECT * FROM client WHERE phoneNumber = ?;";
 		Client client = null;
 		try(PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
 
 	
-			preparedStatement.setInt(1, id);
+			preparedStatement.setInt(1, phoneNumber);
 			
 			ResultSet rs = preparedStatement.executeQuery();
 			 // loop through the result set
@@ -146,7 +139,7 @@ public class ClientDAO {
             			Integer.parseInt(rs.getString("zipCode")),rs.getString("kindOfSubscription"),rs.getString("kindOfExercise"),Long.parseLong(rs.getString("phoneNumber")),
             			rs.getString("birthDate"));
             	
-                System.out.println(rs.getString("firstName")+rs.getString("lastName"));
+//                System.out.println(rs.getString("firstName")+rs.getString("lastName"));
             }	
 			
 			
