@@ -10,13 +10,17 @@ import java.util.ArrayList;
 
 import subApplication.model.Client;
 
-public class ClientDAO extends DAO {
+public class ClientDAO {
 	
 	
 	private static ClientDAO instance = null; 
+	private Database database;
+	private Connection connection;
 
 	private ClientDAO() {
-		super.connect();
+		database = Database.getInstance();
+		connection = database.getConnection();
+		
 	}
 	
 	public static ClientDAO getInstance() {

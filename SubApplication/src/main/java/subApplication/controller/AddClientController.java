@@ -21,6 +21,8 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import subApplication.dao.ClientDAO;
+import subApplication.dao.ExercisesDAO;
+import subApplication.dao.SubscriptionsDAO;
 import subApplication.model.Client;
 
 public class AddClientController implements Initializable {
@@ -56,28 +58,13 @@ public class AddClientController implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		ArrayList<String> exercises = new ArrayList<>();
-		exercises.add("Sex");
-		exercises.add("double Sex");
-		
-		ArrayList<String> subscriptions = new ArrayList<>();
-		subscriptions.add("Student");
-		subscriptions.add("Normal");
-		
-		ObservableList<String> kindOfExercises = FXCollections.observableArrayList(exercises);
-		ObservableList<String> kindOfSubscriptions = FXCollections.observableArrayList(subscriptions);
+		ObservableList<String> kindOfExercises = FXCollections.observableArrayList(ExercisesDAO.getInstance().selectAll());
+		ObservableList<String> kindOfSubscriptions = FXCollections.observableArrayList(SubscriptionsDAO.getInstance().selectAll());
 		
 		kindOfExercise.getItems().addAll(kindOfExercises);
-		//setItems(kindOfExercises);
 		kindOfSubscription.setItems(kindOfSubscriptions);
 		
-//		kindOfExercise.getCheckModel().getCheckedItems().addListener(new ListChangeListener<String>() {
-//	         public void onChanged(ListChangeListener.Change<? extends String> c) {
-//
-////	             selectedFeatures = addFeaturesCheckComboBox.getCheckModel().getSelectedItems();
-//	         }
-//	     });
-		
+
 		
 		
 

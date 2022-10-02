@@ -1,6 +1,8 @@
 subApplication/controller/MainController.class
+subApplication/dao/SubscriptionsDAO.class
 subApplication/App.class
+subApplication/dao/Database.class
 subApplication/dao/ClientDAO.class
-subApplication/dao/DAO.class
+subApplication/dao/ExercisesDAO.class
 subApplication/controller/AddClientController.class
 subApplication/model/Client.class

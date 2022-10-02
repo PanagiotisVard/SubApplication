@@ -17,6 +17,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import subApplication.dao.ClientDAO;
+import subApplication.dao.Database;
 import subApplication.model.Client;
 
 import java.io.IOException;
@@ -32,6 +33,7 @@ public class App extends Application {
 		
 		Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("main.fxml"));
 		Scene scene = new Scene(root);
+//		Database.connect();
 		
 //		primaryStage.setMaximized(true);
 		primaryStage.setScene(scene);

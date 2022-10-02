@@ -4,13 +4,14 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class DAO {
-	protected Connection connection;
+public class Database {
+	private Connection connection;
 	private String dbUrl;
+	private static Database instance;
 
 	
 	
-	protected void connect() {
+	private void connect() {
 		try {
 			dbUrl = "jdbc:sqlite:db/clients.db";
 			connection = DriverManager.getConnection(dbUrl);
@@ -21,6 +22,21 @@ public class DAO {
 		}
 		
 	}
+	
+	public static Database getInstance() {
+		if (instance == null) {
+			instance = new Database();
+			instance.connect();
+		}
+		return instance;
+		
+	}
+
+	public Connection getConnection() {
+		return connection;
+	}
+	
+	
 	
 
 }
