@@ -90,7 +90,7 @@
       </BorderPane>
       <AnchorPane prefHeight="76.0" prefWidth="418.0">
          <children>
-            <Button fx:id="add" layoutX="54.0" layoutY="26.0" mnemonicParsing="false" onAction="#addBtnHandler" text="Add" AnchorPane.bottomAnchor="26.0" AnchorPane.leftAnchor="54.0" AnchorPane.rightAnchor="302.0" AnchorPane.topAnchor="26.0" />
+            <Button fx:id="add" layoutX="54.0" layoutY="26.0" mnemonicParsing="false" onAction="#addBtnHandler" style="-fx-wrap-text: true;" text="Add" wrapText="true" AnchorPane.bottomAnchor="26.0" AnchorPane.leftAnchor="54.0" AnchorPane.rightAnchor="302.0" AnchorPane.topAnchor="26.0" />
             <Button fx:id="cancel" layoutX="301.0" layoutY="26.0" mnemonicParsing="false" onAction="#cancelBtnHandler" prefHeight="24.0" prefWidth="77.0" text="Cancel" AnchorPane.bottomAnchor="26.0" AnchorPane.leftAnchor="301.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="26.0" />
          </children>
       </AnchorPane>

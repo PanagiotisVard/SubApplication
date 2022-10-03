@@ -33,6 +33,7 @@
 -->
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ContextMenu?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
@@ -41,7 +42,6 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
-
 
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="1106.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="subApplication.controller.MainController">
   <children>
@@ -98,6 +98,15 @@
                   <TableColumn fx:id="phoneNumber" prefWidth="137.0" text="Τηλέφωνο" />
                   <TableColumn fx:id="birthDate" prefWidth="137.0" text="Ημ. Γέννησης" />
               </columns>
+               <contextMenu>
+                  <ContextMenu>
+                    <items>
+                      <MenuItem mnemonicParsing="false" text="Update" onAction="#updateHandler" />
+                      <MenuItem mnemonicParsing="false" text="Delete" onAction="#deleteHandler"/>
+                      <MenuItem mnemonicParsing="false" text="Show ..." />
+                    </items>
+                  </ContextMenu>
+               </contextMenu>
             </TableView>
             <Button id="addBtn" layoutX="465.0" layoutY="411.0" mnemonicParsing="false" onAction="#addBtnHandler" prefHeight="24.0" prefWidth="176.0" text="Add" textAlignment="CENTER" AnchorPane.bottomAnchor="65.0" AnchorPane.leftAnchor="465.0" AnchorPane.rightAnchor="465.0" />
       </children>

@@ -83,11 +83,11 @@ public class ClientDAO {
 		
 	}
 	
-	public void delete(int id) {
-		String sql = "DELETE FROM client WHERE id = ?";
+	public void delete(long phoneNumber) {
+		String sql = "DELETE FROM client WHERE phoneNumber = ?";
 		
 		try(PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
-			preparedStatement.setInt(1, id);
+			preparedStatement.setLong(1, phoneNumber);
 			
 			preparedStatement.executeUpdate();
 			
@@ -100,9 +100,9 @@ public class ClientDAO {
 		
 	}
 	
-	public void update(int id, Client client) {
+	public void update(long phoneNumber, Client client) {
 		String sql = "UPDATE client SET firstName = ?, lastName = ?, fatherfirstName = ?, address = ?, zipCode = ?, "
-				+ "kindOfSubscription = ?, kindOfExercise = ?, phoneNumber = ?, birthDate = ? WHERE id = ?";
+				+ "kindOfSubscription = ?, kindOfExercise = ?, phoneNumber = ?, birthDate = ? WHERE phoneNumber = ?";
 		
 		try(PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
 			preparedStatement.setString(1, client.getFirstName());
@@ -114,7 +114,7 @@ public class ClientDAO {
 			preparedStatement.setString(7, client.getKindOfExercise());
 			preparedStatement.setLong(8, client.getPhoneNumber());
 			preparedStatement.setString(9, client.getBirthDate());
-			preparedStatement.setInt(10, id);
+			preparedStatement.setLong(10, phoneNumber);
 			preparedStatement.executeUpdate();
 			
 			
@@ -122,18 +122,19 @@ public class ClientDAO {
 			
 		} catch (SQLException e) {
 			// TODO: handle exception
+			e.printStackTrace();
 		}
 		 
 		
 	}
 	
-	public Client selectByPhoneNumber(int phoneNumber) {
+	public Client selectByPhoneNumber(long phoneNumber) {
 		String sql = "SELECT * FROM client WHERE phoneNumber = ?;";
 		Client client = null;
 		try(PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
 
 	
-			preparedStatement.setInt(1, phoneNumber);
+			preparedStatement.setLong(1, phoneNumber);
 			
 			ResultSet rs = preparedStatement.executeQuery();
 			 // loop through the result set
