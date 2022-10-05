@@ -90,7 +90,6 @@ public class MainController implements Initializable {
 			        Stage stage = new Stage();
 //			        stage.setTitle("New Window");
 			        stage.setScene(scene);
-			        
 			        stage.show();
 			        stage.setOnCloseRequest(event ->  populate());
 			        

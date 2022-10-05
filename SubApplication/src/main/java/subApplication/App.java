@@ -31,11 +31,8 @@ public class App extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		
-		Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("main.fxml"));
+		Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("login.fxml"));
 		Scene scene = new Scene(root);
-//		Database.connect();
-		
-//		primaryStage.setMaximized(true);
 		primaryStage.setScene(scene);
 		primaryStage.show();
 	
