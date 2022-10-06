@@ -4,6 +4,10 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 
 import subApplication.dao.ClientDAO;
 import subApplication.model.Client;
@@ -46,6 +50,9 @@ public class MainController implements Initializable {
 		private TableColumn<Client, Integer> zipCode;
 		@FXML
 		private TableColumn<Client, Long> phoneNumber;
+		@FXML
+		private TableColumn<Client, Long> expireOfSubscription;
+		
 		
 		private ClientDAO dao;
 
@@ -62,6 +69,15 @@ public class MainController implements Initializable {
 			dao = ClientDAO.getInstance();
 			ObservableList<Client> clients = FXCollections.observableArrayList(dao.selectAll());
 			
+			for (Client client: clients) {
+				LocalDate created_at = LocalDate.parse(client.getCreated_at(), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+				long difference = ChronoUnit.DAYS.between(created_at, LocalDate.now());
+				if (difference < 0)
+					difference = -1;
+				client.setDaysToExpire(30 - difference%31+"");
+				
+			}
+		
 			
 			firstName.setCellValueFactory( new PropertyValueFactory<Client, String>("firstName"));
 			lastName.setCellValueFactory(new PropertyValueFactory<Client, String>("LastName"));
@@ -72,6 +88,7 @@ public class MainController implements Initializable {
 			birthDate.setCellValueFactory(new PropertyValueFactory<Client, String>("birthDate"));
 			zipCode.setCellValueFactory(new PropertyValueFactory<Client, Integer>("zipCode"));
 			phoneNumber.setCellValueFactory(new PropertyValueFactory<Client, Long>("phoneNumber"));
+			expireOfSubscription.setCellValueFactory(new PropertyValueFactory<Client, Long>("daysToExpire"));
 			
 			clientsTableview.setItems(clients);
 			

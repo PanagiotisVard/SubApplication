@@ -12,6 +12,8 @@ public class Client {
 	private int    zipCode;			   //TK
 	private long   phoneNumber;		   //Phone number
 	private String birthDate;
+	private String created_at;
+	private String daysToExpire;
 	
 	
 	
@@ -26,13 +28,14 @@ public class Client {
 		this.zipCode = 0;
 		this.phoneNumber = 0;
 		this.birthDate = "";
+		this.created_at = "";
 		
 	}
 
 	
 	//Constructor
 	public Client(String firstName, String lastName, String fatherFirstName, String address, int zipCode,
-			String kindOfSubscription, String kindOfExercise, long phoneNumber, String birthDate) {
+			String kindOfSubscription, String kindOfExercise, long phoneNumber, String birthDate,  String created_at) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -43,6 +46,8 @@ public class Client {
 		this.zipCode = zipCode;
 		this.phoneNumber = phoneNumber;
 		this.birthDate = birthDate;
+		this.created_at = created_at;
+		
 
 	}
 
@@ -121,6 +126,29 @@ public class Client {
 	public void setBirthDate(String birthDate) {
 		this.birthDate = birthDate;
 	}
+
+
+	public String getCreated_at() {
+		return created_at;
+	}
+
+
+	public void setCreated_at(String created_at) {
+		this.created_at = created_at;
+	}
+
+
+	public String getDaysToExpire() {
+		return daysToExpire;
+	}
+
+
+	public void setDaysToExpire(String daysToExpire) {
+		this.daysToExpire = daysToExpire;
+	}
+	
+	
+	
 
 	
 		

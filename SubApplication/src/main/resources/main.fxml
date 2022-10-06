@@ -43,7 +43,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="1106.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="subApplication.controller.MainController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="1229.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="subApplication.controller.MainController">
   <children>
     <MenuBar prefHeight="27.0" prefWidth="741.0" VBox.vgrow="NEVER">
       <menus>
@@ -94,16 +94,18 @@
                   <TableColumn fx:id="kindOfSubscription" prefWidth="149.0" text="Είδος συνδρομής" />
                   <TableColumn fx:id="kindOfExercise" prefWidth="137.0" text="Είδος άσκησης" />
                   <TableColumn fx:id="address" prefWidth="137.0" text="Διεύθυνση" />
-                  <TableColumn fx:id="zipCode" prefWidth="137.0" text="Τ.Κ." />
-                  <TableColumn fx:id="phoneNumber" prefWidth="137.0" text="Τηλέφωνο" />
-                  <TableColumn fx:id="birthDate" prefWidth="137.0" text="Ημ. Γέννησης" />
+                  <TableColumn fx:id="zipCode" prefWidth="45.0" text="Τ.Κ." />
+                  <TableColumn fx:id="phoneNumber" prefWidth="99.0" text="Τηλέφωνο" />
+                  <TableColumn fx:id="birthDate" minWidth="0.0" prefWidth="145.0" text="Ημ. Γέννησης" />
+                  <TableColumn fx:id="debt" minWidth="0.0" prefWidth="101.0" text="Οφειλή" />
+                  <TableColumn fx:id="expireOfSubscription" prefWidth="146.0" text="Λήξη Συνδρομής" />
               </columns>
                <contextMenu>
                   <ContextMenu>
                     <items>
-                      <MenuItem mnemonicParsing="false" text="Update" onAction="#updateHandler" />
-                      <MenuItem mnemonicParsing="false" text="Delete" onAction="#deleteHandler"/>
-                      <MenuItem mnemonicParsing="false" text="Show ..." />
+                      <MenuItem mnemonicParsing="false" onAction="#updateHandler" text="Update" />
+                      <MenuItem mnemonicParsing="false" onAction="#deleteHandler" text="Delete" />
+                      <MenuItem mnemonicParsing="false" />
                     </items>
                   </ContextMenu>
                </contextMenu>

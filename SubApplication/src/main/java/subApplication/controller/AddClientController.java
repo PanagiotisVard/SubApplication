@@ -3,6 +3,7 @@ package subApplication.controller;
 
 import java.net.URL;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
@@ -117,6 +118,7 @@ public class AddClientController implements Initializable {
 	@FXML
 	public void addBtnHandler(ActionEvent event) {
 		Stage stage = (Stage) add.getScene().getWindow();
+		DateTimeFormatter dateTimeFormatter =  DateTimeFormatter.ofPattern("dd/MM/yyyy");
 		
 		String firstNameString = firstName.getText();
 		String lastNameString = lastName.getText();
@@ -126,7 +128,9 @@ public class AddClientController implements Initializable {
 		String addressString = address.getText();
 		String kindOfSubscriptionString = kindOfSubscription.getValue();
 		String kindOfExerciseString = "";
-		String birthDateString = birthDate.getValue().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+		String birthDateString = birthDate.getValue().format(dateTimeFormatter);
+		String created_at = dateTimeFormatter.format(LocalDateTime.now());
+		
 				
 		int zipCodeInt = Integer.parseInt(zipCodeString);
 		long phoneNumberLong = Long.parseLong(phoneNumberString);
@@ -142,7 +146,8 @@ public class AddClientController implements Initializable {
 		
 		
 		Client newClient = new Client(firstNameString, lastNameString, fatherFirstNameString, addressString, zipCodeInt,
-										kindOfSubscriptionString ,kindOfExerciseString , phoneNumberLong, birthDateString);
+										kindOfSubscriptionString ,kindOfExerciseString , phoneNumberLong, birthDateString, created_at);
+		
 		
 		
 		if (add.getText().contains("Update")) {

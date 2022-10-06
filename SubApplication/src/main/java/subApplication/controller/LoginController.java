@@ -37,12 +37,12 @@ public class LoginController implements Initializable {
 		
 	}
 	
-	public String hashPassword(String plainTextPassword) {
-		
+	private String hashPassword(String plainTextPassword) {
+				
 		return bCryptPasswordEncoder.encode(plainTextPassword);
 	}
 
-	public boolean checkPassword(String encodedPassword, String plainTextPassword) {
+	private boolean checkPassword(String encodedPassword, String plainTextPassword) {
 
 		return bCryptPasswordEncoder.matches(plainTextPassword, encodedPassword);
 		
