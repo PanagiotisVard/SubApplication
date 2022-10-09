@@ -33,30 +33,32 @@ public class ClientDAO {
 	
 	
 	
-	public  ArrayList<Client> selectAll() {
+	public  ArrayList<Client> selectAll() throws SQLException{
 		String sql = "SELECT * FROM client;";
 		ArrayList<Client> clients = new ArrayList<Client>();
 		
 		
-		try (	
-	             Statement stmt  = connection.createStatement();
-	             ResultSet rs    = stmt.executeQuery(sql)){
-	            
-	            // loop through the result set
-	            while (rs.next()) {
-	                //System.out.println(rs.getString("firstName"));
-	            	Client client = new Client(rs.getString("firstName"),rs.getString("lastName"),rs.getString("fatherFirstName"),rs.getString("address"),
-	            			Integer.parseInt(rs.getString("zipCode")),rs.getString("kindOfSubscription"),rs.getString("kindOfExercise"),Long.parseLong(rs.getString("phoneNumber")),
-	            			rs.getString("birthDate"), rs.getString("created_at"));
-	                clients.add(client);
-	            }
-	        } catch (SQLException e) {
-	            System.out.println(e.getMessage());
-	        }
+		Statement stmt  = connection.createStatement();
+		ResultSet rs    = stmt.executeQuery(sql);
+        // loop through the result set
 		
-		return clients;
-		
-	}
+        while (rs.next()) {
+	        //System.out.println(rs.getString("firstName"));
+		    Client client = new Client(rs.getString("firstName"),rs.getString("lastName"),rs.getString("fatherFirstName"),rs.getString("address"),
+		    							Integer.parseInt(rs.getString("zipCode")),rs.getString("kindOfSubscription"),rs.getString("kindOfExercise"),Long.parseLong(rs.getString("phoneNumber")),
+		    							rs.getString("birthDate"), rs.getString("created_at"));
+	    
+		    clients.add(client);
+        }
+        
+        return clients;
+        
+    }
+	
+  
+	
+	
+	
 	
 	public void insert(Client client) {
 		String sql = "INSERT INTO client(firstName, lastName, fatherfirstName, address, zipCode, "

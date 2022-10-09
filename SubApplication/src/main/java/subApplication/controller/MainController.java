@@ -2,6 +2,7 @@ package subApplication.controller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import java.time.LocalDate;
@@ -66,31 +67,38 @@ public class MainController implements Initializable {
 
 		@FXML	
 		public void populate() {
-			dao = ClientDAO.getInstance();
-			ObservableList<Client> clients = FXCollections.observableArrayList(dao.selectAll());
 			
-			for (Client client: clients) {
-				LocalDate created_at = LocalDate.parse(client.getCreated_at(), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-				long difference = ChronoUnit.DAYS.between(created_at, LocalDate.now());
-				if (difference < 0)
-					difference = -1;
-				client.setDaysToExpire(30 - difference%31+"");
+			try {
+				dao = ClientDAO.getInstance();
+				ObservableList<Client> clients = FXCollections.observableArrayList(dao.selectAll());
+				
+				for (Client client: clients) {
+					LocalDate created_at = LocalDate.parse(client.getCreated_at(), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+					long difference = ChronoUnit.DAYS.between(created_at, LocalDate.now());
+					if (difference < 0)
+						difference = -1;
+					client.setDaysToExpire(30 - difference%31+"");
+					
+				}
+			
+				
+				firstName.setCellValueFactory( new PropertyValueFactory<Client, String>("firstName"));
+				lastName.setCellValueFactory(new PropertyValueFactory<Client, String>("LastName"));
+				fatherFirstName.setCellValueFactory(new PropertyValueFactory<Client, String>("FatherFirstName"));
+				kindOfSubscription.setCellValueFactory(new PropertyValueFactory<Client, String>("kindOfSubscription"));
+				kindOfExercise.setCellValueFactory(new PropertyValueFactory<Client, String>("kindOfExercise"));
+				address.setCellValueFactory(new PropertyValueFactory<Client, String>("address"));
+				birthDate.setCellValueFactory(new PropertyValueFactory<Client, String>("birthDate"));
+				zipCode.setCellValueFactory(new PropertyValueFactory<Client, Integer>("zipCode"));
+				phoneNumber.setCellValueFactory(new PropertyValueFactory<Client, Long>("phoneNumber"));
+				expireOfSubscription.setCellValueFactory(new PropertyValueFactory<Client, Long>("daysToExpire"));
+				
+				clientsTableview.setItems(clients);
+			}
+			
+			catch(SQLException sql){
 				
 			}
-		
-			
-			firstName.setCellValueFactory( new PropertyValueFactory<Client, String>("firstName"));
-			lastName.setCellValueFactory(new PropertyValueFactory<Client, String>("LastName"));
-			fatherFirstName.setCellValueFactory(new PropertyValueFactory<Client, String>("FatherFirstName"));
-			kindOfSubscription.setCellValueFactory(new PropertyValueFactory<Client, String>("kindOfSubscription"));
-			kindOfExercise.setCellValueFactory(new PropertyValueFactory<Client, String>("kindOfExercise"));
-			address.setCellValueFactory(new PropertyValueFactory<Client, String>("address"));
-			birthDate.setCellValueFactory(new PropertyValueFactory<Client, String>("birthDate"));
-			zipCode.setCellValueFactory(new PropertyValueFactory<Client, Integer>("zipCode"));
-			phoneNumber.setCellValueFactory(new PropertyValueFactory<Client, Long>("phoneNumber"));
-			expireOfSubscription.setCellValueFactory(new PropertyValueFactory<Client, Long>("daysToExpire"));
-			
-			clientsTableview.setItems(clients);
 			
 		}
 		
