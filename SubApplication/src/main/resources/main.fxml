@@ -47,18 +47,11 @@
   <children>
     <MenuBar prefHeight="27.0" prefWidth="741.0" VBox.vgrow="NEVER">
       <menus>
-        <Menu mnemonicParsing="false" text="File">
+        <Menu mnemonicParsing="false" text="Activities">
           <items>
-            <MenuItem mnemonicParsing="false" text="New" />
-            <MenuItem mnemonicParsing="false" text="Open…" />
-            <Menu mnemonicParsing="false" text="Open Recent" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Close" />
-            <MenuItem mnemonicParsing="false" text="Save" />
-            <MenuItem mnemonicParsing="false" text="Save As…" />
-            <MenuItem mnemonicParsing="false" text="Revert" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Preferences…" />
+            <MenuItem mnemonicParsing="false" onAction="#addBtnHandler" text="Add" />
+            <MenuItem mnemonicParsing="false" onAction="#deleteHandler" text="Delete" />
+            <MenuItem mnemonicParsing="false" onAction="#updateHandler" text="Update" />
             <SeparatorMenuItem mnemonicParsing="false" />
             <MenuItem mnemonicParsing="false" text="Quit" />
           </items>
@@ -105,7 +98,6 @@
                     <items>
                       <MenuItem mnemonicParsing="false" onAction="#updateHandler" text="Update" />
                       <MenuItem mnemonicParsing="false" onAction="#deleteHandler" text="Delete" />
-                      <MenuItem mnemonicParsing="false" />
                     </items>
                   </ContextMenu>
                </contextMenu>

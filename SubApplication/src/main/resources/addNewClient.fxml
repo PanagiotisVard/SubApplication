@@ -68,13 +68,13 @@
                <children>
                   <Label alignment="CENTER_RIGHT" text="Όνομα" textAlignment="RIGHT" />
                   <Label prefHeight="16.0" prefWidth="298.0" text="Επώνυμο" GridPane.rowIndex="1" />
-                  <Label text="Label" GridPane.rowIndex="2" />
-                  <Label text="Label" GridPane.rowIndex="3" />
-                  <Label text="Label" GridPane.rowIndex="4" />
-                  <Label text="Label" GridPane.rowIndex="5" />
-                  <Label text="Label" GridPane.rowIndex="6" />
-                  <Label text="Label" GridPane.rowIndex="7" />
-                  <Label text="Label" GridPane.rowIndex="8" />
+                  <Label text="Πατρώνυμο" GridPane.rowIndex="2" />
+                  <Label text="Είδος Συνδρομής" GridPane.rowIndex="3" />
+                  <Label text="Είδος Άσκησης" GridPane.rowIndex="4" />
+                  <Label text="Οδός" GridPane.rowIndex="5" />
+                  <Label text="Τηλέφωνο" GridPane.rowIndex="6" />
+                  <Label text="ΤΚ" GridPane.rowIndex="7" />
+                  <Label text="Ημ/νία Γέννησης" GridPane.rowIndex="8" />
                   <TextField fx:id="firstName" prefHeight="24.0" prefWidth="304.0" GridPane.columnIndex="1" />
                   <TextField fx:id="lastName" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                   <TextField fx:id="fatherFirstName" GridPane.columnIndex="1" GridPane.rowIndex="2" />

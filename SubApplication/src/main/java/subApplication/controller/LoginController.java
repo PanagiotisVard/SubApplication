@@ -77,7 +77,7 @@ public class LoginController implements Initializable {
 	public void registerHandler() {
 		
 		dao.insert(new User(username.getText(), hashPassword(password.getText())));
-		
+
 		
 	}
 
