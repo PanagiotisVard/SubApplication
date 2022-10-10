@@ -32,7 +32,6 @@
   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 -->
 
-<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ContextMenu?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
@@ -79,7 +78,7 @@
     </MenuBar>
     <AnchorPane VBox.vgrow="ALWAYS">
       <children>
-            <TableView fx:id="clientsTableview" layoutX="1.0" layoutY="14.0" minHeight="-Infinity" prefHeight="400.0" prefWidth="1106.0" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <TableView fx:id="clientsTableview" layoutX="1.0" layoutY="14.0" minHeight="-Infinity" prefHeight="500.0" prefWidth="1229.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
               <columns>
                 <TableColumn fx:id="firstName" prefWidth="75.0" text="Όνομα" />
                 <TableColumn fx:id="lastName" prefWidth="83.0" text="Επώνυμο" />
@@ -103,7 +102,6 @@
                   </ContextMenu>
                </contextMenu>
             </TableView>
-            <Button id="addBtn" layoutX="465.0" layoutY="411.0" mnemonicParsing="false" onAction="#addBtnHandler" prefHeight="24.0" prefWidth="176.0" text="Add" textAlignment="CENTER" AnchorPane.bottomAnchor="65.0" AnchorPane.leftAnchor="465.0" AnchorPane.rightAnchor="465.0" />
       </children>
     </AnchorPane>
   </children>
