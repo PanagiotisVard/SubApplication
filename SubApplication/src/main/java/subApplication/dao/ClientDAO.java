@@ -1,7 +1,6 @@
 package subApplication.dao;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -43,10 +42,9 @@ public class ClientDAO {
         // loop through the result set
 		
         while (rs.next()) {
-	        //System.out.println(rs.getString("firstName"));
 		    Client client = new Client(rs.getString("firstName"),rs.getString("lastName"),rs.getString("fatherFirstName"),rs.getString("address"),
 		    							Integer.parseInt(rs.getString("zipCode")),rs.getString("kindOfSubscription"),rs.getString("kindOfExercise"),Long.parseLong(rs.getString("phoneNumber")),
-		    							rs.getString("birthDate"), rs.getString("created_at"));
+		    							rs.getString("birthDate"), rs.getString("created_at"), rs.getInt("payments"));
 	    
 		    clients.add(client);
         }
@@ -62,7 +60,7 @@ public class ClientDAO {
 	
 	public void insert(Client client) {
 		String sql = "INSERT INTO client(firstName, lastName, fatherfirstName, address, zipCode, "
-				+ "kindOfSubscription, kindOfExercise, phoneNumber, birthDate, created_at) VALUES(?,?,?,?,?,?,?,?,?,?)";
+				+ "kindOfSubscription, kindOfExercise, phoneNumber, birthDate, created_at, payments) VALUES(?,?,?,?,?,?,?,?,?,?, 0)";
 		
 		try(PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
 			preparedStatement.setString(1, client.getFirstName());
@@ -104,7 +102,7 @@ public class ClientDAO {
 	
 	public void update(long phoneNumber, Client client) {
 		String sql = "UPDATE client SET firstName = ?, lastName = ?, fatherfirstName = ?, address = ?, zipCode = ?, "
-				+ "kindOfSubscription = ?, kindOfExercise = ?, phoneNumber = ?, birthDate = ?, created_at = ? WHERE phoneNumber = ?";
+				+ "kindOfSubscription = ?, kindOfExercise = ?, phoneNumber = ?, birthDate = ?, created_at = ?, payments = ? WHERE phoneNumber = ?";
 		
 		try(PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
 			preparedStatement.setString(1, client.getFirstName());
@@ -117,7 +115,8 @@ public class ClientDAO {
 			preparedStatement.setLong(8, client.getPhoneNumber());
 			preparedStatement.setString(9, client.getBirthDate());
 			preparedStatement.setString(10, client.getCreated_at());
-			preparedStatement.setLong(11, phoneNumber);
+			preparedStatement.setInt(11, client.getPayments());
+			preparedStatement.setLong(12, phoneNumber);
 			preparedStatement.executeUpdate();
 			
 			
@@ -145,9 +144,8 @@ public class ClientDAO {
             while (rs.next()) {
             	client = new Client(rs.getString("firstName"),rs.getString("lastName"),rs.getString("fatherFirstName"),rs.getString("address"),
             			Integer.parseInt(rs.getString("zipCode")),rs.getString("kindOfSubscription"),rs.getString("kindOfExercise"),Long.parseLong(rs.getString("phoneNumber")),
-            			rs.getString("birthDate"),rs.getString("created_at"));
+            			rs.getString("birthDate"),rs.getString("created_at"), rs.getInt("payments"));
             	
-//                System.out.println(rs.getString("firstName")+rs.getString("lastName"));
             }	
 			
 			

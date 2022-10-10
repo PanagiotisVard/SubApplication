@@ -13,7 +13,12 @@ public class Client {
 	private long   phoneNumber;		   //Phone number
 	private String birthDate;
 	private String created_at;
-	private String daysToExpire;
+	private int daysToExpire;
+	private int payments;
+	private double debt;
+	private String debtWithCurrency;
+	private final String currency = "\u20ac"; // euro
+	
 	
 	
 	
@@ -35,7 +40,7 @@ public class Client {
 	
 	//Constructor
 	public Client(String firstName, String lastName, String fatherFirstName, String address, int zipCode,
-			String kindOfSubscription, String kindOfExercise, long phoneNumber, String birthDate,  String created_at) {
+			String kindOfSubscription, String kindOfExercise, long phoneNumber, String birthDate,  String created_at, int payment) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -47,7 +52,7 @@ public class Client {
 		this.phoneNumber = phoneNumber;
 		this.birthDate = birthDate;
 		this.created_at = created_at;
-		
+		this.payments = payment;
 
 	}
 
@@ -138,14 +143,40 @@ public class Client {
 	}
 
 
-	public String getDaysToExpire() {
+	public int getDaysToExpire() {
 		return daysToExpire;
 	}
 
 
-	public void setDaysToExpire(String daysToExpire) {
+	public void setDaysToExpire(int daysToExpire) {
 		this.daysToExpire = daysToExpire;
 	}
+
+
+	public int getPayments() {
+		return payments;
+	}
+
+
+	public void setPayments(int payments) {
+		this.payments = payments;
+	}
+
+
+	public double getDebt() {
+		return debt;
+	}
+
+
+	public void setDebt(double debt) {
+		this.debt = debt;
+	}
+	
+	public String getDebtWithCurrency() {
+		return debt+currency;
+	}
+	
+	
 	
 	
 	

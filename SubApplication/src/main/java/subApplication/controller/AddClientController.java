@@ -53,6 +53,7 @@ public class AddClientController implements Initializable {
 	
 	private Client toUpdateClient;
 	private Long toUpdareClientPhoneNumber;
+	private int payments;
 	
 	
 	
@@ -64,6 +65,7 @@ public class AddClientController implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		payments = 0;
 		dao = ClientDAO.getInstance();
 		ObservableList<String> kindOfExercises = FXCollections.observableArrayList(ExercisesDAO.getInstance().selectAll());
 		ObservableList<String> kindOfSubscriptions = FXCollections.observableArrayList(SubscriptionsDAO.getInstance().selectAll());
@@ -98,6 +100,7 @@ public class AddClientController implements Initializable {
 				kindOfSubscription.setValue(toUpdateClient.getKindOfSubscription());
 				
 				birthDate.setValue(LocalDate.parse(toUpdateClient.getBirthDate(), DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+				payments = toUpdateClient.getPayments();
 				add.setText("Update");
 
 				
@@ -146,7 +149,7 @@ public class AddClientController implements Initializable {
 		
 		
 		Client newClient = new Client(firstNameString, lastNameString, fatherFirstNameString, addressString, zipCodeInt,
-										kindOfSubscriptionString ,kindOfExerciseString , phoneNumberLong, birthDateString, created_at);
+										kindOfSubscriptionString ,kindOfExerciseString , phoneNumberLong, birthDateString, created_at, payments);
 		
 		
 		

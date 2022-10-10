@@ -53,6 +53,8 @@ public class MainController implements Initializable {
 		private TableColumn<Client, Long> phoneNumber;
 		@FXML
 		private TableColumn<Client, Long> expireOfSubscription;
+		@FXML
+		private TableColumn<Client,String> debt;
 		
 		
 		private ClientDAO dao;
@@ -68,16 +70,19 @@ public class MainController implements Initializable {
 		@FXML	
 		public void populate() {
 			
+			
 			try {
 				dao = ClientDAO.getInstance();
 				ObservableList<Client> clients = FXCollections.observableArrayList(dao.selectAll());
 				
 				for (Client client: clients) {
+					int subscriptionPrice = 30;
 					LocalDate created_at = LocalDate.parse(client.getCreated_at(), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
 					long difference = ChronoUnit.DAYS.between(created_at, LocalDate.now());
 					if (difference < 0)
 						difference = -1;
-					client.setDaysToExpire(30 - difference%31+"");
+					client.setDaysToExpire((int) (30 - difference%31));
+					client.setDebt((1 + difference / 31) * subscriptionPrice - (client.getPayments() * subscriptionPrice));
 					
 				}
 			
@@ -92,6 +97,7 @@ public class MainController implements Initializable {
 				zipCode.setCellValueFactory(new PropertyValueFactory<Client, Integer>("zipCode"));
 				phoneNumber.setCellValueFactory(new PropertyValueFactory<Client, Long>("phoneNumber"));
 				expireOfSubscription.setCellValueFactory(new PropertyValueFactory<Client, Long>("daysToExpire"));
+				debt.setCellValueFactory(new PropertyValueFactory<Client, String>("debtWithCurrency"));
 				
 				clientsTableview.setItems(clients);
 			}
@@ -157,6 +163,15 @@ public class MainController implements Initializable {
 				dao.delete(selectedClientPhoneNumber);
 				populate();
 			}
+		}
+		
+		@FXML
+		public void payHandler() {
+			Client selectedClient =  clientsTableview.getSelectionModel().getSelectedItem();
+			selectedClient.setPayments(selectedClient.getPayments()+1);
+			dao.update(selectedClient.getPhoneNumber(), selectedClient);
+			populate();
+			
 		}
 		
 

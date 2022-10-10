@@ -98,6 +98,7 @@
                     <items>
                       <MenuItem mnemonicParsing="false" onAction="#updateHandler" text="Update" />
                       <MenuItem mnemonicParsing="false" onAction="#deleteHandler" text="Delete" />
+                      <MenuItem mnemonicParsing="false" onAction="#payHandler" text="Pay month" />
                     </items>
                   </ContextMenu>
                </contextMenu>
