@@ -58,76 +58,55 @@ public class ClientDAO {
 	
 	
 	
-	public void insert(Client client) {
+	public void insert(Client client) throws SQLException {
 		String sql = "INSERT INTO client(firstName, lastName, fatherfirstName, address, zipCode, "
 				+ "kindOfSubscription, kindOfExercise, phoneNumber, birthDate, created_at, payments) VALUES(?,?,?,?,?,?,?,?,?,?, 0)";
 		
-		try(PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
-			preparedStatement.setString(1, client.getFirstName());
-			preparedStatement.setString(2, client.getLastName());
-			preparedStatement.setString(3, client.getFatherFirstName());
-			preparedStatement.setString(4, client.getAddress());
-			preparedStatement.setInt(5, client.getZipCode());
-			preparedStatement.setString(6, client.getKindOfSubscription());
-			preparedStatement.setString(7, client.getKindOfExercise());
-			preparedStatement.setLong(8, client.getPhoneNumber());
-			preparedStatement.setString(9, client.getBirthDate());
-			preparedStatement.setString(10, client.getCreated_at());
-			preparedStatement.executeUpdate();
+		PreparedStatement preparedStatement = connection.prepareStatement(sql);
+		preparedStatement.setString(1, client.getFirstName());
+		preparedStatement.setString(2, client.getLastName());
+		preparedStatement.setString(3, client.getFatherFirstName());
+		preparedStatement.setString(4, client.getAddress());
+		preparedStatement.setInt(5, client.getZipCode());
+		preparedStatement.setString(6, client.getKindOfSubscription());
+		preparedStatement.setString(7, client.getKindOfExercise());
+		preparedStatement.setLong(8, client.getPhoneNumber());
+		preparedStatement.setString(9, client.getBirthDate());
+		preparedStatement.setString(10, client.getCreated_at());
+		preparedStatement.executeUpdate();
 			
 			
-		} catch (SQLException e) {
-			// TODO: handle exception
-			e.printStackTrace();
-		}
-		
 	}
 	
-	public void delete(long phoneNumber) {
+	public void delete(long phoneNumber) throws SQLException {
 		String sql = "DELETE FROM client WHERE phoneNumber = ?";
 		
-		try(PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
-			preparedStatement.setLong(1, phoneNumber);
+		PreparedStatement preparedStatement = connection.prepareStatement(sql);
+		preparedStatement.setLong(1, phoneNumber);
 			
-			preparedStatement.executeUpdate();
-			
-			
-			
-			
-		} catch (SQLException e) {
-			// TODO: handle exception
-		}
+		preparedStatement.executeUpdate();
 		
 	}
 	
-	public void update(long phoneNumber, Client client) {
+	public void update(long phoneNumber, Client client) throws SQLException {
 		String sql = "UPDATE client SET firstName = ?, lastName = ?, fatherfirstName = ?, address = ?, zipCode = ?, "
 				+ "kindOfSubscription = ?, kindOfExercise = ?, phoneNumber = ?, birthDate = ?, created_at = ?, payments = ? WHERE phoneNumber = ?";
 		
-		try(PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
-			preparedStatement.setString(1, client.getFirstName());
-			preparedStatement.setString(2, client.getLastName());
-			preparedStatement.setString(3, client.getFatherFirstName());
-			preparedStatement.setString(4, client.getAddress());
-			preparedStatement.setInt(5, client.getZipCode());
-			preparedStatement.setString(6, client.getKindOfSubscription());
-			preparedStatement.setString(7, client.getKindOfExercise());
-			preparedStatement.setLong(8, client.getPhoneNumber());
-			preparedStatement.setString(9, client.getBirthDate());
-			preparedStatement.setString(10, client.getCreated_at());
-			preparedStatement.setInt(11, client.getPayments());
-			preparedStatement.setLong(12, phoneNumber);
-			preparedStatement.executeUpdate();
-			
-			
-			
-			
-		} catch (SQLException e) {
-			// TODO: handle exception
-			e.printStackTrace();
-		}
+		PreparedStatement preparedStatement = connection.prepareStatement(sql);
+		preparedStatement.setString(1, client.getFirstName());
+		preparedStatement.setString(2, client.getLastName());
+		preparedStatement.setString(3, client.getFatherFirstName());
+		preparedStatement.setString(4, client.getAddress());
+		preparedStatement.setInt(5, client.getZipCode());
+		preparedStatement.setString(6, client.getKindOfSubscription());
+		preparedStatement.setString(7, client.getKindOfExercise());
+		preparedStatement.setLong(8, client.getPhoneNumber());
+		preparedStatement.setString(9, client.getBirthDate());
+		preparedStatement.setString(10, client.getCreated_at());
+		preparedStatement.setInt(11, client.getPayments());
+		preparedStatement.setLong(12, phoneNumber);
+		preparedStatement.executeUpdate();
 		 
-		
 	}
 	
 	public Client selectByPhoneNumber(long phoneNumber) {

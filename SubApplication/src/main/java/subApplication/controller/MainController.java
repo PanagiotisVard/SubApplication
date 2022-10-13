@@ -11,6 +11,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 
 import subApplication.dao.ClientDAO;
+import subApplication.dao.SubscriptionsDAO;
 import subApplication.model.Client;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -66,7 +67,7 @@ public class MainController implements Initializable {
 			
 		}
 		
-
+		//TODO ADD final to try catch later
 		@FXML	
 		public void populate() {
 			
@@ -76,7 +77,8 @@ public class MainController implements Initializable {
 				ObservableList<Client> clients = FXCollections.observableArrayList(dao.selectAll());
 				
 				for (Client client: clients) {
-					int subscriptionPrice = 30;
+					double subscriptionPrice = SubscriptionsDAO.getInstance().getPrice(client.getKindOfSubscription());
+					System.out.println(subscriptionPrice);
 					LocalDate created_at = LocalDate.parse(client.getCreated_at(), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
 					long difference = ChronoUnit.DAYS.between(created_at, LocalDate.now());
 					if (difference < 0)
@@ -100,10 +102,9 @@ public class MainController implements Initializable {
 				debt.setCellValueFactory(new PropertyValueFactory<Client, String>("debtWithCurrency"));
 				
 				clientsTableview.setItems(clients);
-			}
 			
-			catch(SQLException sql){
-				
+			}catch(SQLException sql){
+				sql.printStackTrace();
 			}
 			
 		}
@@ -140,8 +141,7 @@ public class MainController implements Initializable {
 		        fxmlLoader.setLocation(getClass().getClassLoader().getResource("addNewClient.fxml"));
 		        Scene scene = new Scene(fxmlLoader.load());
 		        Stage stage = new Stage();
-		        
-//		        
+		         
 		        stage.setScene(scene);
 		        stage.setUserData(selectedClientPhoneNumber);
 		        stage.show();
@@ -153,23 +153,38 @@ public class MainController implements Initializable {
 			
 			
 		}
-		
+		//TODO ADD final to try catch later
 		@FXML
 		public void deleteHandler() {
 			long selectedClientPhoneNumber =  clientsTableview.getSelectionModel().getSelectedItem().getPhoneNumber();
 			Alert confirmationAlert  = new Alert(AlertType.CONFIRMATION, "Confirm delete", ButtonType.YES, ButtonType.NO);
 			Optional<ButtonType> confirmation = confirmationAlert.showAndWait();
 			if (confirmation.get() == ButtonType.YES) {
-				dao.delete(selectedClientPhoneNumber);
+				
+				try {
+					dao.delete(selectedClientPhoneNumber);
+				} catch (SQLException sql) {
+					// TODO Auto-generated catch block
+					sql.printStackTrace();
+				}
 				populate();
 			}
 		}
 		
+		//TODO ADD final to try catch later
 		@FXML
 		public void payHandler() {
 			Client selectedClient =  clientsTableview.getSelectionModel().getSelectedItem();
 			selectedClient.setPayments(selectedClient.getPayments()+1);
-			dao.update(selectedClient.getPhoneNumber(), selectedClient);
+			
+			try {
+				dao.update(selectedClient.getPhoneNumber(), selectedClient);
+			}
+			catch(SQLException sql) {
+				
+				sql.printStackTrace();
+			}
+			
 			populate();
 			
 		}

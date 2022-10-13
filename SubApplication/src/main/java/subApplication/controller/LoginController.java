@@ -3,6 +3,7 @@ package subApplication.controller;
 import java.io.IOException;
 import java.net.URL;
 import java.security.SecureRandom;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -76,8 +77,15 @@ public class LoginController implements Initializable {
 	@FXML
 	public void registerHandler() {
 		
-		dao.insert(new User(username.getText(), hashPassword(password.getText())));
-
+		try {
+			
+			dao.insert(new User(username.getText(), hashPassword(password.getText())));
+			
+		}catch(SQLException sql){
+			
+			sql.printStackTrace();
+			
+		}
 		
 	}
 

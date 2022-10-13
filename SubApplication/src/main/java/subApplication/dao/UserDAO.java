@@ -54,20 +54,14 @@ public class UserDAO {
 		return user;
 	}
 	
-	public void insert(User user) {
+	public void insert(User user) throws SQLException {
 		String sql = "INSERT INTO user(username, password) VALUES(?, ?)";
-		
-		try(PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
-			preparedStatement.setString(1, user.getUsername());
-			preparedStatement.setString(2, user.getPassword());
-			preparedStatement.executeUpdate();
+	
+		PreparedStatement preparedStatement = connection.prepareStatement(sql);
+		preparedStatement.setString(1, user.getUsername());
+		preparedStatement.setString(2, user.getPassword());
+		preparedStatement.executeUpdate();
 			
-			
-			
-			
-		} catch (SQLException e) {
-			// TODO: handle exception
-		}
 		
 	}
 

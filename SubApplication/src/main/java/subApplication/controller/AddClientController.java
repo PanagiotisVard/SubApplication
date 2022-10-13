@@ -2,6 +2,7 @@ package subApplication.controller;
 
 
 import java.net.URL;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -68,7 +69,9 @@ public class AddClientController implements Initializable {
 		payments = 0;
 		dao = ClientDAO.getInstance();
 		ObservableList<String> kindOfExercises = FXCollections.observableArrayList(ExercisesDAO.getInstance().selectAll());
-		ObservableList<String> kindOfSubscriptions = FXCollections.observableArrayList(SubscriptionsDAO.getInstance().selectAll());
+		ObservableList<String> kindOfSubscriptions = FXCollections.observableArrayList();
+		
+		// TODO
 		
 		kindOfExercise.getItems().addAll(kindOfExercises);
 		kindOfSubscription.setItems(kindOfSubscriptions);
@@ -119,7 +122,7 @@ public class AddClientController implements Initializable {
 	}
 	
 	@FXML
-	public void addBtnHandler(ActionEvent event) {
+	public void addBtnHandler(ActionEvent event){
 		Stage stage = (Stage) add.getScene().getWindow();
 		DateTimeFormatter dateTimeFormatter =  DateTimeFormatter.ofPattern("dd/MM/yyyy");
 		
@@ -151,12 +154,21 @@ public class AddClientController implements Initializable {
 		Client newClient = new Client(firstNameString, lastNameString, fatherFirstNameString, addressString, zipCodeInt,
 										kindOfSubscriptionString ,kindOfExerciseString , phoneNumberLong, birthDateString, created_at, payments);
 		
+		try {
 		
-		
-		if (add.getText().contains("Update")) {
-			dao.update(toUpdareClientPhoneNumber, newClient);
-		} else {
-			dao.insert(newClient);
+			if (add.getText().contains("Update")) {
+				
+				dao.update(toUpdareClientPhoneNumber, newClient);
+					
+			}else{
+				
+				dao.insert(newClient);	
+				
+			}
+		}catch(SQLException sql) {
+			
+			sql.printStackTrace();
+			
 		}
 		
 		stage.fireEvent(new WindowEvent(stage, WindowEvent.WINDOW_CLOSE_REQUEST));
