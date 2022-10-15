@@ -59,8 +59,8 @@ public class SubscriptionsDAO {
 	
 	
 	public  ArrayList<Subscription> selectAll() {
-		String sql = "SELECT subscription FROM subscription;";
-		ArrayList<Subscription> exercises = new ArrayList<Subscription>();
+		String sql = "SELECT * FROM subscription;";
+		ArrayList<Subscription> subscriptions = new ArrayList<Subscription>();
 		
 		
 		try (	
@@ -70,13 +70,14 @@ public class SubscriptionsDAO {
 	            // loop through the result set
 	            while (rs.next()) {
 	               
-	                exercises.add(new Subscription(rs.getString("subscription"), rs.getInt("visible")));
+	                subscriptions.add(new Subscription(rs.getString("subscription"), rs.getInt("visible")));
 	            }
 	        } catch (SQLException e) {
+	        	e.printStackTrace();
 	            System.out.println(e.getMessage());
 	        }
 		
-		return exercises;
+		return subscriptions;
 		
 	}
 

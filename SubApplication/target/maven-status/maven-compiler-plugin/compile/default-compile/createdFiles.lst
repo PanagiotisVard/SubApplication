@@ -1,3 +1,4 @@
+subApplication/model/Subscription.class
 subApplication/App.class
 subApplication/dao/Database.class
 subApplication/dao/ClientDAO.class

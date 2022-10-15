@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import org.controlsfx.control.CheckComboBox;
@@ -26,6 +27,7 @@ import subApplication.dao.ClientDAO;
 import subApplication.dao.ExercisesDAO;
 import subApplication.dao.SubscriptionsDAO;
 import subApplication.model.Client;
+import subApplication.model.Subscription;
 
 public class AddClientController implements Initializable {
 	private ClientDAO dao;
@@ -69,12 +71,21 @@ public class AddClientController implements Initializable {
 		payments = 0;
 		dao = ClientDAO.getInstance();
 		ObservableList<String> kindOfExercises = FXCollections.observableArrayList(ExercisesDAO.getInstance().selectAll());
-		ObservableList<String> kindOfSubscriptions = FXCollections.observableArrayList();
+		ObservableList<String> kindOfSubscriptionsStrings = FXCollections.observableArrayList();
+		ArrayList<Subscription>  kindOfSubscriptions =  SubscriptionsDAO.getInstance().selectAll();
+		
 		
 		// TODO
+		for (Subscription subscription: kindOfSubscriptions) {
+			System.out.println(subscription.getVisible());
+			if (subscription.getVisible() == 1) {
+				kindOfSubscriptionsStrings.add(subscription.getKindOfSubscription());
+			}
+			
+		}
 		
 		kindOfExercise.getItems().addAll(kindOfExercises);
-		kindOfSubscription.setItems(kindOfSubscriptions);
+		kindOfSubscription.setItems(kindOfSubscriptionsStrings);
 		Platform.runLater(() -> {
 			toUpdareClientPhoneNumber = (Long) kindOfExercise.getScene().getWindow().getUserData();
 			if (toUpdareClientPhoneNumber != null) {

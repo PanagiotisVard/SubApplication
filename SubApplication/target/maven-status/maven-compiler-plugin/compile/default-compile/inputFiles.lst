@@ -3,6 +3,7 @@
 /home/tasakos/MyWork/SubApplication/SubApplication/src/main/java/subApplication/controller/MainController.java
 /home/tasakos/MyWork/SubApplication/SubApplication/src/main/java/subApplication/dao/ExercisesDAO.java
 /home/tasakos/MyWork/SubApplication/SubApplication/src/main/java/subApplication/App.java
+/home/tasakos/MyWork/SubApplication/SubApplication/src/main/java/subApplication/model/Subscription.java
 /home/tasakos/MyWork/SubApplication/SubApplication/src/main/java/subApplication/dao/SubscriptionsDAO.java
 /home/tasakos/MyWork/SubApplication/SubApplication/src/main/java/subApplication/model/User.java
 /home/tasakos/MyWork/SubApplication/SubApplication/src/main/java/subApplication/dao/Database.java
