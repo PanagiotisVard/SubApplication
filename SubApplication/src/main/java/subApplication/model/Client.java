@@ -14,10 +14,13 @@ public class Client {
 	private String birthDate;
 	private String created_at;
 	private int daysToExpire;
+	private String daysToExpireWithSuffix;
 	private int payments;
 	private double debt;
 	private String debtWithCurrency;
 	private final String currency = "\u20ac"; // euro
+	private final String moreThanOneDaysToExpireSuffix = " ημέρες";
+	private final String oneDayToExpireSuffix = " ημέρα";
 	
 	
 	
@@ -176,7 +179,12 @@ public class Client {
 		return debt+currency;
 	}
 	
-	
+	public String getDaysToExpireWithSuffix() {
+		if (daysToExpire > 1) {
+			return daysToExpire + moreThanOneDaysToExpireSuffix;
+		}
+		return daysToExpire + oneDayToExpireSuffix;
+	}
 	
 	
 	

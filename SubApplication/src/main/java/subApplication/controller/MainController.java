@@ -53,7 +53,7 @@ public class MainController implements Initializable {
 		@FXML
 		private TableColumn<Client, Long> phoneNumber;
 		@FXML
-		private TableColumn<Client, Long> expireOfSubscription;
+		private TableColumn<Client, String> expireOfSubscription;
 		@FXML
 		private TableColumn<Client,String> debt;
 		
@@ -98,7 +98,7 @@ public class MainController implements Initializable {
 				birthDate.setCellValueFactory(new PropertyValueFactory<Client, String>("birthDate"));
 				zipCode.setCellValueFactory(new PropertyValueFactory<Client, Integer>("zipCode"));
 				phoneNumber.setCellValueFactory(new PropertyValueFactory<Client, Long>("phoneNumber"));
-				expireOfSubscription.setCellValueFactory(new PropertyValueFactory<Client, Long>("daysToExpire"));
+				expireOfSubscription.setCellValueFactory(new PropertyValueFactory<Client, String>("daysToExpireWithSuffix"));
 				debt.setCellValueFactory(new PropertyValueFactory<Client, String>("debtWithCurrency"));
 				
 				clientsTableview.setItems(clients);
