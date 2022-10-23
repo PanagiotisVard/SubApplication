@@ -9,4 +9,5 @@ subApplication\controller\AddClientController.class
 subApplication\dao\Database.class
 subApplication\controller\LoginController.class
 subApplication\dao\UserDAO.class
+subApplication\controller\LoginController$1.class
 subApplication\model\Subscription.class
