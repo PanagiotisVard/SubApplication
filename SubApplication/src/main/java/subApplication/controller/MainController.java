@@ -3,6 +3,7 @@ package subApplication.controller;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import java.time.LocalDate;
@@ -67,49 +68,49 @@ public class MainController implements Initializable {
 		@Override
 		public void initialize(URL location, ResourceBundle resources) {
 			// TODO Auto-generated method stub
-			populate();
+			dao = ClientDAO.getInstance();
+			
+			try {
+				populate(dao.selectAll());
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			
 		}
 		
 		//TODO ADD final to try catch later
-		@FXML	
-		public void populate() {
+		
+		private void populate(ArrayList<Client> clientsArrayList ) {
 			
+			ObservableList<Client> clients = FXCollections.observableArrayList(clientsArrayList);
 			
-			try {
-				dao = ClientDAO.getInstance();
-				ObservableList<Client> clients = FXCollections.observableArrayList(dao.selectAll());
+			for (Client client: clients) {
+				double subscriptionPrice = SubscriptionsDAO.getInstance().getPrice(client.getKindOfSubscription());
+				System.out.println(subscriptionPrice);
+				LocalDate created_at = LocalDate.parse(client.getCreated_at(), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+				long difference = ChronoUnit.DAYS.between(created_at, LocalDate.now());
+				if (difference < 0)
+					difference = -1;
+				client.setDaysToExpire((int) (30 - difference%31));
+				client.setDebt((1 + difference / 31) * subscriptionPrice - (client.getPayments() * subscriptionPrice));
 				
-				for (Client client: clients) {
-					double subscriptionPrice = SubscriptionsDAO.getInstance().getPrice(client.getKindOfSubscription());
-					System.out.println(subscriptionPrice);
-					LocalDate created_at = LocalDate.parse(client.getCreated_at(), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-					long difference = ChronoUnit.DAYS.between(created_at, LocalDate.now());
-					if (difference < 0)
-						difference = -1;
-					client.setDaysToExpire((int) (30 - difference%31));
-					client.setDebt((1 + difference / 31) * subscriptionPrice - (client.getPayments() * subscriptionPrice));
-					
-				}
-			
-				
-				firstName.setCellValueFactory( new PropertyValueFactory<Client, String>("firstName"));
-				lastName.setCellValueFactory(new PropertyValueFactory<Client, String>("LastName"));
-				fatherFirstName.setCellValueFactory(new PropertyValueFactory<Client, String>("FatherFirstName"));
-				kindOfSubscription.setCellValueFactory(new PropertyValueFactory<Client, String>("kindOfSubscription"));
-				kindOfExercise.setCellValueFactory(new PropertyValueFactory<Client, String>("kindOfExercise"));
-				address.setCellValueFactory(new PropertyValueFactory<Client, String>("address"));
-				birthDate.setCellValueFactory(new PropertyValueFactory<Client, String>("birthDate"));
-				zipCode.setCellValueFactory(new PropertyValueFactory<Client, Integer>("zipCode"));
-				phoneNumber.setCellValueFactory(new PropertyValueFactory<Client, Long>("phoneNumber"));
-				expireOfSubscription.setCellValueFactory(new PropertyValueFactory<Client, String>("daysToExpireWithSuffix"));
-				debt.setCellValueFactory(new PropertyValueFactory<Client, String>("debtWithCurrency"));
-				
-				clientsTableview.setItems(clients);
-			
-			}catch(SQLException sql){
-				sql.printStackTrace();
 			}
+		
+			
+			firstName.setCellValueFactory( new PropertyValueFactory<Client, String>("firstName"));
+			lastName.setCellValueFactory(new PropertyValueFactory<Client, String>("LastName"));
+			fatherFirstName.setCellValueFactory(new PropertyValueFactory<Client, String>("FatherFirstName"));
+			kindOfSubscription.setCellValueFactory(new PropertyValueFactory<Client, String>("kindOfSubscription"));
+			kindOfExercise.setCellValueFactory(new PropertyValueFactory<Client, String>("kindOfExercise"));
+			address.setCellValueFactory(new PropertyValueFactory<Client, String>("address"));
+			birthDate.setCellValueFactory(new PropertyValueFactory<Client, String>("birthDate"));
+			zipCode.setCellValueFactory(new PropertyValueFactory<Client, Integer>("zipCode"));
+			phoneNumber.setCellValueFactory(new PropertyValueFactory<Client, Long>("phoneNumber"));
+			expireOfSubscription.setCellValueFactory(new PropertyValueFactory<Client, String>("daysToExpireWithSuffix"));
+			debt.setCellValueFactory(new PropertyValueFactory<Client, String>("debtWithCurrency"));
+			
+			clientsTableview.setItems(clients);
 			
 		}
 		
@@ -127,7 +128,14 @@ public class MainController implements Initializable {
 //			        stage.setTitle("New Window");
 			        stage.setScene(scene);
 			        stage.show();
-			        stage.setOnCloseRequest(event ->  populate());
+			        stage.setOnCloseRequest(event ->  {
+						try {
+							populate(dao.selectAll());
+						} catch (SQLException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					});
 			        
 			    } catch (IOException e) {
 			    	e.printStackTrace();
@@ -149,7 +157,14 @@ public class MainController implements Initializable {
 		        stage.setScene(scene);
 		        stage.setUserData(selectedClientPhoneNumber);
 		        stage.show();
-		        stage.setOnCloseRequest(event ->  populate());
+		        stage.setOnCloseRequest(event ->  {
+					try {
+						populate(dao.selectAll());
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				});
 		    } catch (IOException e) {
 		    	e.printStackTrace();
 		        
@@ -171,7 +186,12 @@ public class MainController implements Initializable {
 					// TODO Auto-generated catch block
 					sql.printStackTrace();
 				}
-				populate();
+				try {
+					populate(dao.selectAll());
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		}
 		
@@ -189,18 +209,26 @@ public class MainController implements Initializable {
 				sql.printStackTrace();
 			}
 			
-			populate();
+			try {
+				populate(dao.selectAll());
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			
 		}
 		
 		@FXML
 		public void searchHandler() {
+			long phoneNumber = Long.parseLong(searchField.getText());
+			
+			Client client = dao.selectByPhoneNumber(phoneNumber);
+			ArrayList<Client> clients = new ArrayList<Client>();
+			
+			clients.add(client);
+			
+			populate(clients);
 			
 		}
-		
-
-		
-
-		
 
 }

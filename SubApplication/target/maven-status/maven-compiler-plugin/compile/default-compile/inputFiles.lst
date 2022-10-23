@@ -1,12 +1,12 @@
-/home/tasakos/MyWork/SubApplication/SubApplication/src/main/java/subApplication/controller/AddClientController.java
-/home/tasakos/MyWork/SubApplication/SubApplication/src/main/java/subApplication/model/Client.java
-/home/tasakos/MyWork/SubApplication/SubApplication/src/main/java/subApplication/controller/MainController.java
-/home/tasakos/MyWork/SubApplication/SubApplication/src/main/java/subApplication/dao/ExercisesDAO.java
-/home/tasakos/MyWork/SubApplication/SubApplication/src/main/java/subApplication/App.java
-/home/tasakos/MyWork/SubApplication/SubApplication/src/main/java/subApplication/model/Subscription.java
-/home/tasakos/MyWork/SubApplication/SubApplication/src/main/java/subApplication/dao/SubscriptionsDAO.java
-/home/tasakos/MyWork/SubApplication/SubApplication/src/main/java/subApplication/model/User.java
-/home/tasakos/MyWork/SubApplication/SubApplication/src/main/java/subApplication/dao/Database.java
-/home/tasakos/MyWork/SubApplication/SubApplication/src/main/java/subApplication/controller/LoginController.java
-/home/tasakos/MyWork/SubApplication/SubApplication/src/main/java/subApplication/dao/ClientDAO.java
-/home/tasakos/MyWork/SubApplication/SubApplication/src/main/java/subApplication/dao/UserDAO.java
+D:\eclipse WS\SubApplication\SubApplication\src\main\java\subApplication\dao\ClientDAO.java
+D:\eclipse WS\SubApplication\SubApplication\src\main\java\subApplication\dao\ExercisesDAO.java
+D:\eclipse WS\SubApplication\SubApplication\src\main\java\subApplication\model\User.java
+D:\eclipse WS\SubApplication\SubApplication\src\main\java\subApplication\App.java
+D:\eclipse WS\SubApplication\SubApplication\src\main\java\subApplication\dao\SubscriptionsDAO.java
+D:\eclipse WS\SubApplication\SubApplication\src\main\java\subApplication\dao\UserDAO.java
+D:\eclipse WS\SubApplication\SubApplication\src\main\java\subApplication\controller\LoginController.java
+D:\eclipse WS\SubApplication\SubApplication\src\main\java\subApplication\controller\AddClientController.java
+D:\eclipse WS\SubApplication\SubApplication\src\main\java\subApplication\controller\MainController.java
+D:\eclipse WS\SubApplication\SubApplication\src\main\java\subApplication\model\Subscription.java
+D:\eclipse WS\SubApplication\SubApplication\src\main\java\subApplication\dao\Database.java
+D:\eclipse WS\SubApplication\SubApplication\src\main\java\subApplication\model\Client.java
