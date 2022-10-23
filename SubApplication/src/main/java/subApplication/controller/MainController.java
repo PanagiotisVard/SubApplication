@@ -23,6 +23,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
@@ -56,6 +57,9 @@ public class MainController implements Initializable {
 		private TableColumn<Client, String> expireOfSubscription;
 		@FXML
 		private TableColumn<Client,String> debt;
+		@FXML
+		private TextField searchField;
+		
 		
 		
 		private ClientDAO dao;
@@ -186,6 +190,11 @@ public class MainController implements Initializable {
 			}
 			
 			populate();
+			
+		}
+		
+		@FXML
+		public void searchHandler() {
 			
 		}
 		
