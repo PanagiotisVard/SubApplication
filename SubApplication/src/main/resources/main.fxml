@@ -90,8 +90,9 @@
                   </ContextMenu>
                </contextMenu>
             </TableView>
-            <Button fx:id="searchBtn" layoutX="1120.0" layoutY="-1.0" mnemonicParsing="false" onAction="#searchHandler" prefHeight="27.0" prefWidth="109.0" text="Αναζήτηση" AnchorPane.bottomAnchor="473.0" AnchorPane.leftAnchor="1120.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-1.0" />
-            <TextField fx:id="searchField" prefHeight="24.0" prefWidth="1120.0" promptText="Τηλέφωνο..." AnchorPane.bottomAnchor="475.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="109.0" AnchorPane.topAnchor="0.0" />
+            <Button fx:id="searchBtn" layoutX="1018.0" layoutY="-1.0" mnemonicParsing="false" onAction="#searchHandler" prefHeight="27.0" prefWidth="103.0" text="Αναζήτηση" AnchorPane.bottomAnchor="473.0" AnchorPane.leftAnchor="1018.0" AnchorPane.rightAnchor="108.0" AnchorPane.topAnchor="-1.0" />
+            <TextField fx:id="searchField" prefHeight="24.0" prefWidth="1018.0" promptText="Τηλέφωνο..." AnchorPane.bottomAnchor="475.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="211.0" AnchorPane.topAnchor="0.0" />
+            <Button fx:id="clearBtn" layoutX="1120.0" layoutY="-1.0" mnemonicParsing="false" onAction="#clearHandler" prefHeight="27.0" prefWidth="109.0" text="Καθάρισε" />
       </children>
     </AnchorPane>
   </children>

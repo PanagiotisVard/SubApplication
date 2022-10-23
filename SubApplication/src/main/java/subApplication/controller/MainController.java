@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 
@@ -82,12 +81,14 @@ public class MainController implements Initializable {
 		//TODO ADD final to try catch later
 		
 		private void populate(ArrayList<Client> clientsArrayList ) {
+			if (clientsArrayList.contains(null)) {
+				throw new NullPointerException();
+			}
 			
 			ObservableList<Client> clients = FXCollections.observableArrayList(clientsArrayList);
 			
 			for (Client client: clients) {
 				double subscriptionPrice = SubscriptionsDAO.getInstance().getPrice(client.getKindOfSubscription());
-				System.out.println(subscriptionPrice);
 				LocalDate created_at = LocalDate.parse(client.getCreated_at(), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
 				long difference = ChronoUnit.DAYS.between(created_at, LocalDate.now());
 				if (difference < 0)
@@ -220,15 +221,39 @@ public class MainController implements Initializable {
 		
 		@FXML
 		public void searchHandler() {
-			long phoneNumber = Long.parseLong(searchField.getText());
+			try {
+				long phoneNumber = Long.parseLong(searchField.getText());
+				Client client = dao.selectByPhoneNumber(phoneNumber);
+				ArrayList<Client> clients = new ArrayList<Client>();
+				
+				
+				clients.add(client);
+				
+				
+				populate(clients);
+			} catch (NumberFormatException e) {
+				new Alert(AlertType.ERROR, "Error! no phonenumber").showAndWait();
+				
+			}
+			catch ( NullPointerException e1) {
+				// TODO: handle exception
+				new Alert(AlertType.ERROR, "Error! no record").showAndWait();
+			}
 			
-			Client client = dao.selectByPhoneNumber(phoneNumber);
-			ArrayList<Client> clients = new ArrayList<Client>();
 			
-			clients.add(client);
 			
-			populate(clients);
 			
+		}
+		
+		@FXML
+		public void clearHandler() {
+			searchField.clear();
+			try {
+				populate(dao.selectAll());
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 
 }
