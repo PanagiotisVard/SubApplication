@@ -13,7 +13,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import subApplication.dao.UserDAO;
 import subApplication.model.User;
 
@@ -63,6 +65,9 @@ public class LoginController implements Initializable {
 			        Stage stage = new Stage();
 //			        stage.setTitle("New Window");
 			        stage.setScene(scene);
+					stage.setResizable(false);
+					//stage.initStyle(StageStyle.UNDECORATED);
+					stage.getIcons().add(new Image(getClass().getClassLoader().getResourceAsStream("icon.jpg")));
 			        stage.show();
 			        Stage myStage = (Stage) username.getScene().getWindow();
 			        myStage.close();

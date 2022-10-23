@@ -17,10 +17,12 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import subApplication.dao.ClientDAO;
@@ -89,7 +91,13 @@ public class AddClientController implements Initializable {
 		Platform.runLater(() -> {
 			toUpdareClientPhoneNumber = (Long) kindOfExercise.getScene().getWindow().getUserData();
 			if (toUpdareClientPhoneNumber != null) {
-				toUpdateClient = dao.selectByPhoneNumber(toUpdareClientPhoneNumber.longValue());
+				try {
+					toUpdateClient = dao.selectByPhoneNumber(toUpdareClientPhoneNumber.longValue());
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					new Alert(AlertType.ERROR, "Error! "+e.getMessage()).showAndWait();			
+
+				}
 				firstName.setText(toUpdateClient.getFirstName());
 				lastName.setText(toUpdateClient.getLastName());
 				fatherFirstName.setText(toUpdateClient.getFatherFirstName());
@@ -145,12 +153,46 @@ public class AddClientController implements Initializable {
 		String addressString = address.getText();
 		String kindOfSubscriptionString = kindOfSubscription.getValue();
 		String kindOfExerciseString = "";
-		String birthDateString = birthDate.getValue().format(dateTimeFormatter);
-		String created_at = dateTimeFormatter.format(LocalDateTime.now());
+		String birthDateString ;
+		String created_at;
 		
-				
-		int zipCodeInt = Integer.parseInt(zipCodeString);
-		long phoneNumberLong = Long.parseLong(phoneNumberString);
+		int zipCodeInt;
+		long phoneNumberLong;
+		
+		try {
+			
+			birthDateString = birthDate.getValue().format(dateTimeFormatter);
+			created_at = dateTimeFormatter.format(LocalDateTime.now());
+			
+		}catch(NullPointerException e) {
+			
+			new Alert(AlertType.ERROR, "Error! No name"+ e.getMessage()).showAndWait();	
+			return ;
+			
+		}
+		
+		try {
+			
+			zipCodeInt = Integer.parseInt(zipCodeString);
+			phoneNumberLong = Long.parseLong(phoneNumberString);
+			
+		}catch(NumberFormatException e) {
+			
+			new Alert(AlertType.ERROR, "Error! No name"+ e.getMessage()).showAndWait();	
+			return ;
+		}
+		
+		
+		if(kindOfSubscriptionString == null || kindOfSubscriptionString.isEmpty()) {
+			new Alert(AlertType.ERROR, "Error! Subcription wrong").showAndWait();	
+			return ; 
+		}
+		
+		if(firstNameString.isEmpty() || lastNameString.isEmpty() || fatherFirstNameString.isEmpty()) {
+			
+			new Alert(AlertType.ERROR, "Error! No name").showAndWait();	
+			return ;
+		}
 		
 		
 		for (String exercises: kindOfExercise.getCheckModel().getCheckedItems()) {
@@ -159,7 +201,12 @@ public class AddClientController implements Initializable {
 		if (kindOfExerciseString.length() > 0)
 			kindOfExerciseString = kindOfExerciseString.substring(0, kindOfExerciseString.length()-1);
 
-   
+		if(kindOfExerciseString.isEmpty()) {
+			
+			new Alert(AlertType.ERROR, "Error! Text Kind Of Exercise is empty").showAndWait();	
+			
+			return;
+		}
 		
 		
 		Client newClient = new Client(firstNameString, lastNameString, fatherFirstNameString, addressString, zipCodeInt,
@@ -178,13 +225,15 @@ public class AddClientController implements Initializable {
 			}
 		}catch(SQLException sql) {
 			
-			sql.printStackTrace();
+			new Alert(AlertType.ERROR, "Error! "+sql.getMessage()).showAndWait();			
+
 			
 		}
 		
 		stage.fireEvent(new WindowEvent(stage, WindowEvent.WINDOW_CLOSE_REQUEST));
 		stage.close();
-					
+		
+		
 	}
 	
 	@FXML 

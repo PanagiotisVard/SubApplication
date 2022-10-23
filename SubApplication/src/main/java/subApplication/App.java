@@ -13,9 +13,11 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import subApplication.dao.ClientDAO;
 import subApplication.dao.Database;
 import subApplication.model.Client;
@@ -34,13 +36,16 @@ public class App extends Application {
 		Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("main.fxml"));
 		Scene scene = new Scene(root);
 		primaryStage.setScene(scene);
+		primaryStage.setResizable(false);
+		primaryStage.getIcons().add(new Image(getClass().getClassLoader().getResourceAsStream("icon.jpg")));
+		//primaryStage.initStyle(StageStyle.UNDECORATED);
 		primaryStage.show();
 	
 	}
 	
 	
 	
-	
+
 	
 
 

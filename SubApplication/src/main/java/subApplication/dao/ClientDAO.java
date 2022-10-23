@@ -109,29 +109,22 @@ public class ClientDAO {
 		 
 	}
 	
-	public Client selectByPhoneNumber(long phoneNumber) {
+	public Client selectByPhoneNumber(long phoneNumber) throws SQLException {
 		String sql = "SELECT * FROM client WHERE phoneNumber = ?;";
 		Client client = null;
-		try(PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+		PreparedStatement preparedStatement = connection.prepareStatement(sql);
 
-	
-			preparedStatement.setLong(1, phoneNumber);
+		preparedStatement.setLong(1, phoneNumber);
 			
-			ResultSet rs = preparedStatement.executeQuery();
-			 // loop through the result set
+		ResultSet rs = preparedStatement.executeQuery();
+		// loop through the result set
 			
-            while (rs.next()) {
-            	client = new Client(rs.getString("firstName"),rs.getString("lastName"),rs.getString("fatherFirstName"),rs.getString("address"),
-            			Integer.parseInt(rs.getString("zipCode")),rs.getString("kindOfSubscription"),rs.getString("kindOfExercise"),Long.parseLong(rs.getString("phoneNumber")),
-            			rs.getString("birthDate"),rs.getString("created_at"), rs.getInt("payments"));
-            	
-            }	
-			
-			
-			
-		} catch (SQLException e) {
-			// TODO: handle exception
-		}
+        while (rs.next()) {
+        	client = new Client(rs.getString("firstName"),rs.getString("lastName"),rs.getString("fatherFirstName"),rs.getString("address"),
+        			Integer.parseInt(rs.getString("zipCode")),rs.getString("kindOfSubscription"),rs.getString("kindOfExercise"),Long.parseLong(rs.getString("phoneNumber")),
+        			rs.getString("birthDate"),rs.getString("created_at"), rs.getInt("payments"));
+        	
+        }	
 		
 		return client;
 	}

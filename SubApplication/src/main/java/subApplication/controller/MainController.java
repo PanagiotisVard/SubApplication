@@ -26,7 +26,9 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 
 
@@ -73,7 +75,7 @@ public class MainController implements Initializable {
 				populate(dao.selectAll());
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+				new Alert(AlertType.ERROR, "Error! "+e.getMessage()).showAndWait();	
 			}
 			
 		}
@@ -128,18 +130,22 @@ public class MainController implements Initializable {
 			        Stage stage = new Stage();
 //			        stage.setTitle("New Window");
 			        stage.setScene(scene);
+			        
+					stage.setResizable(false);
+					//stage.initStyle(StageStyle.UNDECORATED);
+					stage.getIcons().add(new Image(getClass().getClassLoader().getResourceAsStream("icon.jpg")));
 			        stage.show();
 			        stage.setOnCloseRequest(event ->  {
 						try {
 							populate(dao.selectAll());
 						} catch (SQLException e) {
 							// TODO Auto-generated catch block
-							e.printStackTrace();
+							new Alert(AlertType.ERROR, "Error! "+e.getMessage()).showAndWait();	
 						}
 					});
 			        
 			    } catch (IOException e) {
-			    	e.printStackTrace();
+					new Alert(AlertType.ERROR, "Error! "+e.getMessage()).showAndWait();	
 			        
 			    }
 			
@@ -147,7 +153,18 @@ public class MainController implements Initializable {
 		
 		@FXML
 		public void updateHandler() {
-			long selectedClientPhoneNumber =  clientsTableview.getSelectionModel().getSelectedItem().getPhoneNumber();
+			
+			Long selectedClientPhoneNumber= null;
+			
+			try {
+			
+				selectedClientPhoneNumber =  clientsTableview.getSelectionModel().getSelectedItem().getPhoneNumber();	
+				
+			}catch(NullPointerException e) {
+				
+				new Alert(AlertType.ERROR, "Error! No selection").showAndWait();	
+				return;
+			}
 			
 			try {
 		        FXMLLoader fxmlLoader = new FXMLLoader();
@@ -157,17 +174,20 @@ public class MainController implements Initializable {
 		         
 		        stage.setScene(scene);
 		        stage.setUserData(selectedClientPhoneNumber);
+		    	stage.getIcons().add(new Image(getClass().getClassLoader().getResourceAsStream("icon.jpg")));
+		    	stage.setResizable(false);
+				//stage.initStyle(StageStyle.UNDECORATED);
 		        stage.show();
 		        stage.setOnCloseRequest(event ->  {
 					try {
 						populate(dao.selectAll());
 					} catch (SQLException e) {
 						// TODO Auto-generated catch block
-						e.printStackTrace();
+						new Alert(AlertType.ERROR, "Error! "+e.getMessage()).showAndWait();	
 					}
 				});
 		    } catch (IOException e) {
-		    	e.printStackTrace();
+				new Alert(AlertType.ERROR, "Error! "+e.getMessage()).showAndWait();	
 		        
 		    }
 			
@@ -176,7 +196,20 @@ public class MainController implements Initializable {
 		//TODO ADD final to try catch later
 		@FXML
 		public void deleteHandler() {
-			long selectedClientPhoneNumber =  clientsTableview.getSelectionModel().getSelectedItem().getPhoneNumber();
+		
+			long selectedClientPhoneNumber;
+			
+			try {
+			
+				selectedClientPhoneNumber =  clientsTableview.getSelectionModel().getSelectedItem().getPhoneNumber();	
+				
+			}catch(NullPointerException e) {
+				
+				new Alert(AlertType.ERROR, "Error! No selection").showAndWait();	
+				return;
+			}
+			
+			
 			Alert confirmationAlert  = new Alert(AlertType.CONFIRMATION, "Confirm delete", ButtonType.YES, ButtonType.NO);
 			Optional<ButtonType> confirmation = confirmationAlert.showAndWait();
 			if (confirmation.get() == ButtonType.YES) {
@@ -185,13 +218,13 @@ public class MainController implements Initializable {
 					dao.delete(selectedClientPhoneNumber);
 				} catch (SQLException sql) {
 					// TODO Auto-generated catch block
-					sql.printStackTrace();
+					new Alert(AlertType.ERROR, "Error! "+sql.getMessage()).showAndWait();	
 				}
 				try {
 					populate(dao.selectAll());
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
-					e.printStackTrace();
+					new Alert(AlertType.ERROR, "Error! "+e.getMessage()).showAndWait();	
 				}
 			}
 		}
@@ -207,14 +240,15 @@ public class MainController implements Initializable {
 			}
 			catch(SQLException sql) {
 				
-				sql.printStackTrace();
+				new Alert(AlertType.ERROR, "Error! "+sql.getMessage()).showAndWait();	
 			}
 			
 			try {
 				populate(dao.selectAll());
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+				new Alert(AlertType.ERROR, "Error! "+e.getMessage()).showAndWait();			
+
 			}
 			
 		}
@@ -239,6 +273,10 @@ public class MainController implements Initializable {
 				// TODO: handle exception
 				new Alert(AlertType.ERROR, "Error! no record").showAndWait();
 			}
+			catch (SQLException e2) {
+				
+				new Alert(AlertType.ERROR, "Error! "+e2.getMessage()).showAndWait();			
+			}
 			
 			
 			
@@ -252,8 +290,17 @@ public class MainController implements Initializable {
 				populate(dao.selectAll());
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+				new Alert(AlertType.ERROR, "Error! "+e.getMessage()).showAndWait();			
+
 			}
 		}
+		
+		@FXML
+		public void quitHandler() {
+			
+			System.exit(0);
+			
+		}
+		
 
 }
